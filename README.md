@@ -12,3 +12,5 @@ To use this script with a Synology router:
 5. Create the `A` record for your domain in the Porkbun settings (this script only updates them)
 
 **Important Note:** Be very careful when pasting your API and Secret keys into the Synology UI, as it can be quite finicky about handling these inputs. If you encounter any issues, it's a good idea to uncomment the logging statements at the top of the script. This will help you troubleshoot by checking the parameters being passed to the script.
+
+![](docs/image.png)
