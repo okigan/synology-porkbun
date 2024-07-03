@@ -1,7 +1,7 @@
 To use this script with a Synology router:
 
 1. Save the script on your Synology device (e.g., as `/usr/syno/bin/ddns/porkbun.sh`).
-2. Make it executable: `chmod +x /usr/syno/bin/ddns/porkbun.sh`
+2. Make it executable: `sudo chmod +x /usr/syno/bin/ddns/porkbun.sh`
 3. Add an entry to the `/etc/ddns_provider.conf` file (you may need to create this file if it doesn't exist):
 4. In the Synology router's DDNS settings, you should now be able to select "Porkbun" as a provider and enter your API key as the username and your Secret key as the password.
 
