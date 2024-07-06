@@ -14,42 +14,46 @@
 API_BASE="https://api.porkbun.com/api/json/v3/dns"
 API_KEY="$1"
 SECRET_KEY="$2"
-DOMAIN="$3"
+FULL_DOMAIN="$3"
 NEW_IP="$4"
 
-# Function to make API calls
 api_call() {
-    curl -s -X POST "$1" \
-         -H "Content-Type: application/json" \
+    curl -s -X POST "$1" -H "Content-Type: application/json" \
          -d "{\"secretapikey\":\"$SECRET_KEY\",\"apikey\":\"$API_KEY\"$2}"
 }
 
-# Function to extract value from JSON response
-get_json_value() {
-    echo "$1" | sed -n 's/.*"'"$2"'"\s*:\s*"\([^"]*\)".*/\1/p'
-}
+# Extract domain and subdomain
+DOMAIN=$(echo "$FULL_DOMAIN" | awk -F. '{print $(NF-1)"."$NF}')
+SUBDOMAIN=$(echo "$FULL_DOMAIN" | sed "s/.$DOMAIN$//")
 
-# Retrieve current DNS record
-RECORD=$(api_call "$API_BASE/retrieveByNameType/$DOMAIN/A")
+# Construct API endpoint
+if [ -n "$SUBDOMAIN" ]; then
+    API_ENDPOINT="$API_BASE/retrieveByNameType/$DOMAIN/A/$SUBDOMAIN"
+else
+    API_ENDPOINT="$API_BASE/retrieveByNameType/$DOMAIN/A"
+fi
+
+RECORD=$(api_call "$API_ENDPOINT")
 
 if ! echo "$RECORD" | grep -q '"status":"SUCCESS"'; then
-    echo "nohost"
-    exit 1
+    echo "nohost"; exit 1
 fi
 
 CURRENT_IP=$(echo "$RECORD" | sed -n 's/.*"content"\s*:\s*"\([^"]*\)".*/\1/p' | head -n1)
 
-if [ "$NEW_IP" = "$CURRENT_IP" ]; then
-    echo "nochg"
-    exit 0
+[ "$NEW_IP" = "$CURRENT_IP" ] && { echo "nochg"; exit 0; }
+
+# Construct update endpoint
+if [ -n "$SUBDOMAIN" ]; then
+    UPDATE_ENDPOINT="$API_BASE/editByNameType/$DOMAIN/A/$SUBDOMAIN"
+else
+    UPDATE_ENDPOINT="$API_BASE/editByNameType/$DOMAIN/A"
 fi
 
-# Update DNS record
-UPDATE=$(api_call "$API_BASE/editByNameType/$DOMAIN/A" ",\"content\":\"$NEW_IP\"")
+UPDATE=$(api_call "$UPDATE_ENDPOINT" ",\"content\":\"$NEW_IP\"")
 
 if ! echo "$UPDATE" | grep -q '"status":"SUCCESS"'; then
-    error_message=$(get_json_value "$UPDATE" "message")
-    case "$error_message" in
+    case "$(echo "$UPDATE" | sed -n 's/.*"message"\s*:\s*"\([^"]*\)".*/\1/p')" in
         *"authentication"*) echo "badauth" ;;
         *"not found"*) echo "nohost" ;;
         *) echo "911" ;;
@@ -58,5 +62,3 @@ if ! echo "$UPDATE" | grep -q '"status":"SUCCESS"'; then
 fi
 
 echo "good"
-exit 0
-
