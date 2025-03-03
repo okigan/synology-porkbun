@@ -24,7 +24,7 @@ api_call() {
 
 # Extract domain and subdomain
 DOMAIN=$(echo "$FULL_DOMAIN" | awk -F. '{print $(NF-1)"."$NF}')
-SUBDOMAIN=$(echo "$FULL_DOMAIN" | sed "s/.$DOMAIN$//")
+SUBDOMAIN=$(echo "$FULL_DOMAIN" | sed "s/.\?$DOMAIN$//")
 
 # Construct API endpoint
 if [ -n "$SUBDOMAIN" ]; then
