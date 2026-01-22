@@ -1,0 +1,56 @@
+name: PR Check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  shellcheck:
+    name: ShellCheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: '.'
+          severity: warning
+
+  syntax-check:
+    name: Shell Syntax Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check shell script syntax
+        run: |
+          for script in $(find . -name "*.sh" -type f); do
+            echo "Checking syntax: $script"
+            sh -n "$script"
+          done
+
+  test-script:
+    name: Basic Script Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify script is executable-ready
+        run: |
+          # Check shebang
+          head -1 porkbun.sh | grep -q '^#!/bin/sh' || head -1 porkbun.sh | grep -q '^#!/bin/bash'
+          echo "✓ Valid shebang found"
+
+      - name: Check required commands availability
+        run: |
+          # Verify commands used in the script are available
+          command -v curl >/dev/null && echo "✓ curl available"
+          command -v awk >/dev/null && echo "✓ awk available"
+          command -v sed >/dev/null && echo "✓ sed available"
+          command -v grep >/dev/null && echo "✓ grep available"
