@@ -24,7 +24,14 @@ api_call() {
 
 # Extract domain and subdomain
 DOMAIN=$(echo "$FULL_DOMAIN" | awk -F. '{print $(NF-1)"."$NF}')
-SUBDOMAIN=$(echo "$FULL_DOMAIN" | sed "s/.\?$DOMAIN$//")
+if [ "$DOMAIN" = "co.uk" ] || [ "$DOMAIN" = "org.uk" ] || [ "$DOMAIN" = "co.nz" ]; then
+    # works for a ccTLD like blah.mydomain.co.uk
+    DOMAIN=$(echo "$FULL_DOMAIN" | cut -d. -f2-)
+    SUBDOMAIN=$(echo "$FULL_DOMAIN" | cut -d. -f1)
+else
+    # works for a gTLD like blah.example.com
+    SUBDOMAIN=$(echo "$FULL_DOMAIN" | sed "s/.\?$DOMAIN$//")
+fi
 
 # Construct API endpoint
 if [ -n "$SUBDOMAIN" ]; then
