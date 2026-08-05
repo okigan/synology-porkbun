@@ -1,0 +1,52 @@
+{
+  "european gas prices fall below 50 euros megawatt hour 2023": [
+    {
+      "title": "European gas prices end 2023 near 32 euros per megawatt hour",
+      "url": "https://www.reuters.com/markets/commodities/european-gas-2023-review",
+      "snippet": "Dutch TTF front-month gas settled around 32 euros per megawatt hour in December, confirmed by exchange data, well below the 50 euro level analysts had watched.",
+      "source": "reuters.com",
+      "published": "2023-12-29"
+    },
+    {
+      "title": "Gas market review: the 2022 spike unwound",
+      "url": "https://www.ft.com/content/gas-market-review-2023",
+      "snippet": "Prices fell through 2023 and exceeded expectations on the downside, ending the year far under the thresholds set at the start.",
+      "source": "ft.com",
+      "published": "2023-12-30"
+    }
+  ],
+  "knowledge workers never return physical office 2024 remote half": [
+    {
+      "title": "Hybrid work settles in: fully remote stays a minority",
+      "url": "https://www.apnews.com/article/hybrid-work-2024-survey",
+      "snippet": "Surveys show roughly 12 percent of knowledge workers are fully remote in 2024. Predictions that most would never return to an office failed to materialize.",
+      "source": "apnews.com",
+      "published": "2024-11-04"
+    },
+    {
+      "title": "Return-to-office mandates expand across large employers",
+      "url": "https://www.reuters.com/business/return-to-office-2024",
+      "snippet": "Major employers did not see the permanent exodus forecast in 2021; attendance recovered to roughly 60 percent of pre-pandemic levels.",
+      "source": "reuters.com",
+      "published": "2024-09-18"
+    }
+  ],
+  "commercial office vacancy rates exceed 40 percent american cities 2024": [
+    {
+      "title": "US office vacancy hits record 20.4 percent",
+      "url": "https://www.reuters.com/markets/us-office-vacancy-record-2024",
+      "snippet": "National office vacancy reached a record 20.4 percent in 2024, high by historical standards but well short of the 40 percent some commentators projected.",
+      "source": "reuters.com",
+      "published": "2024-07-02"
+    }
+  ],
+  "every major retailer deploy generative ai customer service 2024": [
+    {
+      "title": "Retail AI adoption: pilots outnumber deployments",
+      "url": "https://www.ft.com/content/retail-ai-adoption-2024",
+      "snippet": "Most large retailers have piloted generative AI in support workflows, but full deployment remains partial and uneven across the sector.",
+      "source": "ft.com",
+      "published": "2024-10-11"
+    }
+  ]
+}

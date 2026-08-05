@@ -1,0 +1,60 @@
+:root {
+  color-scheme: light;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  color: #16181d;
+}
+body { margin: 0; width: 360px; background: #fff; }
+main { display: flex; flex-direction: column; }
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px; background: #16181d; color: #fff;
+}
+header h1 { margin: 0; font-size: 14px; }
+.status { font-size: 10.5px; padding: 2px 8px; border-radius: 999px; background: #3a3f49; }
+.status.up { background: #1f6b41; }
+.status.down { background: #8f2a1c; }
+
+section { padding: 12px 14px; border-bottom: 1px solid #e6e8ec; }
+.score { display: flex; gap: 11px; align-items: center; margin-bottom: 10px; }
+.score strong { display: block; font-size: 12.5px; line-height: 1.35; }
+.score small { color: #6b727c; font-size: 11px; }
+.dot {
+  width: 38px; height: 38px; border-radius: 50%; flex: none;
+  display: grid; place-items: center; font-weight: 700; color: #16181d;
+}
+.dot.clean { background: #7ddc9a; }
+.dot.low { background: #b9e08a; }
+.dot.moderate { background: #ffc43d; }
+.dot.high { background: #ff7b6b; }
+
+.empty { margin: 0; padding: 14px; color: #6b727c; font-size: 12px; }
+
+.controls { display: flex; gap: 8px; }
+button {
+  flex: 1; font: inherit; font-size: 12px; padding: 7px 10px;
+  border-radius: 8px; border: 1px solid #d3d7de; background: #fff; cursor: pointer;
+}
+button:hover { background: #f3f4f7; }
+
+.settings { display: grid; gap: 9px; border-bottom: 0; }
+.settings label { display: grid; gap: 4px; font-size: 11.5px; color: #4a505a; }
+.settings label.row { display: flex; align-items: center; gap: 8px; }
+.settings input[type="text"], .settings input:not([type]) {
+  font: inherit; padding: 6px 8px; border: 1px solid #d3d7de; border-radius: 7px;
+}
+
+/* Author card styles, shared with the in-page overlay component. */
+.author { border: 1px solid #e6e8ec; border-radius: 10px; padding: 11px 12px; margin-bottom: 9px; }
+.author-head { display: flex; align-items: center; gap: 10px; }
+.author-head h3 { margin: 0; font-size: 13px; }
+.author-head span { font-size: 11px; color: #6b727c; }
+.trust-ring {
+  width: 46px; height: 46px; border-radius: 50%; flex: none;
+  display: grid; place-items: center; font-weight: 700; font-size: 14px; color: #16181d;
+}
+.bars { margin-top: 9px; display: grid; gap: 5px; }
+.bar { display: grid; grid-template-columns: 96px 1fr 34px; gap: 7px; align-items: center; font-size: 10.5px; }
+.bar .track { height: 6px; background: #eef0f4; border-radius: 4px; overflow: hidden; }
+.bar .fill { height: 100%; background: #16181d; }
+.notes { margin: 9px 0 0; padding-left: 16px; font-size: 11px; color: #5a6069; }
